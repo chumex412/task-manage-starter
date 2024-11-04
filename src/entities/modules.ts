@@ -1,0 +1,1 @@
+export type TodoTabType = "All" | "Completed" | "Pending"
