@@ -2,7 +2,8 @@ export interface Task {
   id?: string
   name?: string
   description?: string
-  startTime: Date | number | string
+  startTime?: Date | number | string
+  createdAt?: Date | number | string
   completed?: boolean
 }
 

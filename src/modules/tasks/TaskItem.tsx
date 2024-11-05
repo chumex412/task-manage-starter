@@ -32,7 +32,7 @@ const TaskItem = ({
               {name}
             </label>
             <span className="text-2xl leading-[150%] text-primary">
-              {new Date(startTime).toLocaleDateString(
+              {new Date(startTime || "").toLocaleDateString(
                 "en-Ng",
                 utils.createDateFormatOptions("2-digit", "short", "numeric")
               )}
