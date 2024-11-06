@@ -1,10 +1,10 @@
 export interface Task {
-  id?: string
-  name?: string
-  description?: string
-  startTime?: Date | number | string
-  createdAt?: Date | number | string
-  completed?: boolean
+  id?: string;
+  name?: string;
+  description?: string;
+  startTime?: Date | number | string;
+  createdAt?: Date | number | string;
+  completed: boolean;
 }
 
 export interface EditFormModalProps {

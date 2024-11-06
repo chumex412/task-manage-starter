@@ -6,8 +6,6 @@ import FormButton from "./FormButton";
 import { EditFormModalProps } from "../../entities/ui";
 
 const EditFormModal = ({ show, close, tasks, id }: EditFormModalProps) => {
-  // const [updateTask] = useUpdateTaskMutation()
-
   const [taskName, setTaskName] = useState("");
   const [taskDate, setTaskDate] = useState<Date | string | number>("");
   const [error, setError] = useState("");
@@ -17,7 +15,12 @@ const EditFormModal = ({ show, close, tasks, id }: EditFormModalProps) => {
       const task = tasks.find((task) => task.id === id);
 
       setTaskName(task?.name || "");
-      setTaskDate(task?.startTime || "");
+      const date =
+        new Date(task?.startTime || "").toLocaleDateString(
+          "en-GB",
+          utils.createDateFormatOptions("numeric", "numeric", "numeric")
+        ) || "";
+      setTaskDate(date.split("/").reverse().join("-"));
     },
     [id, tasks]
   );
@@ -40,17 +43,7 @@ const EditFormModal = ({ show, close, tasks, id }: EditFormModalProps) => {
       return;
     }
 
-    const tasksUpdate = tasks.map((task) => {
-      if (task.id === id) {
-        return {
-          ...task,
-          name: taskName,
-          doAt: new Date(taskDate).toLocaleDateString()
-        };
-      }
-
-      return task;
-    });
+    const updatedTask = tasks.find((task) => task.id === id);
 
     // TODO: UPDATE TASK MUTATION
     close();
