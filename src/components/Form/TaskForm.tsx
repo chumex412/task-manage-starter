@@ -71,7 +71,6 @@ const TaskForm = () => {
           className="border-primary bg-primary text-accent"
           full_width
           value="Add Task"
-          onClick={() => {}}
         />
       </form>
     </>
