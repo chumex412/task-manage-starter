@@ -1,48 +1,53 @@
 import { useState, useCallback, ChangeEvent, FormEvent } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import Input from './Input'
-import FormButton from './FormButton'
-// import { useAddTaskMutation } from '../../_services/taskServices'
-import { utils } from '../../utils';
+import FormButton from "./FormButton";
+import { utils } from "../../utils";
 
 const TaskForm = () => {
   const [fields, setFields] = useState({
     task_name: "",
     do_at: ""
-  })
+  });
 
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
-  const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = target;
+  const handleChange = useCallback(
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = target;
 
-    setFields({ ...fields, [name]: value })
-  }, [fields])
+      setFields({ ...fields, [name]: value });
+    },
+    [fields]
+  );
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(!utils.checkEmptyFields(fields)) {
-      setError("All fields are required")
-      return 
+    if (!utils.checkEmptyFields(fields)) {
+      setError("All fields are required");
+      return;
     }
 
     const data = {
       id: uuidv4(),
-      name: fields.task_name, 
-      startTime: new Date(fields.do_at).toLocaleDateString(), 
+      name: fields.task_name,
+      startTime: new Date(fields.do_at).toLocaleDateString(),
       completed: false
-    }
+    };
 
-    // addTask(data)
+    // TODO: ADD TASK MUTATION
 
-    setFields({task_name: "", do_at: ""})
-  }
+    setFields({ task_name: "", do_at: "" });
+  };
 
   return (
     <>
-      <form className="task-form max-w-[650px] w-full mx-auto grid gap-6 p-8 shadow-lg rounded-[5px]" onSubmit={handleSubmit}>
-        <Input 
+      <form
+        className="task-form mx-auto grid w-full max-w-[650px] gap-6 rounded-[5px] p-8 shadow-lg"
+        onSubmit={handleSubmit}
+      >
+        <Input
           placeholder="Enter your to-do"
           label="To-do"
           value={fields.task_name}
@@ -51,7 +56,7 @@ const TaskForm = () => {
           error={error}
           required
         />
-        <Input 
+        <Input
           type="date"
           placeholder="Enter task deadline"
           label="To be done at"
@@ -61,16 +66,16 @@ const TaskForm = () => {
           error={error}
           required
         />
-        <FormButton 
+        <FormButton
           type="submit"
-          className='text-accent border-primary bg-primary'
+          className="border-primary bg-primary text-accent"
           full_width
           value="Add Task"
           onClick={() => {}}
         />
       </form>
     </>
-  )
-}
+  );
+};
 
 export default TaskForm
