@@ -123,7 +123,7 @@
   }
 
   .task-content {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
   }
 }
 

@@ -20,21 +20,13 @@ const Tasks = ({ tasks, tab }: { tasks: Task[]; tab: TodoTabType }) => {
 
   // Handler to complete a task
   const completeTask = (id: string) => {
-    const completedTask = tasks.map((task) => {
-      if (id === task.id) {
-        return { ...task, completed: !task.completed };
-      }
+    const completedTask = tasks.find((task) => id === task.id);
 
-      return task;
-    });
-
-    // TODOD: CALL UPDATE TASK MUTATION
+    // TODO: CALL UPDATE TASK MUTATION
   };
 
   // Handler to remove a task
   const removeTaskHandler = (id: string) => {
-    const filteredTask = tasks.filter((task) => task.id !== id);
-
     // TODO: CALL REMOVE TASK MUTATION
   };
 
@@ -47,7 +39,7 @@ const Tasks = ({ tasks, tab }: { tasks: Task[]; tab: TodoTabType }) => {
           </p>
         ) : (
           <>
-            <h3 className="mb-6 text-center text-3xl capitalize leading-[120%]">
+            <h3 className="mb-6 text-center text-2xl capitalize leading-[120%]">
               {tab} tasks
             </h3>
             {tasks.map((task) => {
