@@ -1,6 +1,5 @@
 import { useState, useCallback, ChangeEvent, FormEvent } from 'react'
-import { v4 as uuidv4 } from 'uuid';
-import Input from './Input'
+import Input from "./Input";
 import FormButton from "./FormButton";
 import { utils } from "../../utils";
 
@@ -30,7 +29,7 @@ const TaskForm = () => {
     }
 
     const data = {
-      id: uuidv4(),
+      id: "",
       name: fields.task_name,
       startTime: new Date(fields.do_at).toLocaleDateString(),
       completed: false
