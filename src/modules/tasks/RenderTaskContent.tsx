@@ -3,14 +3,17 @@ import Tasks from ".";
 import Loader from "../../components/Loader";
 import { TodoTabType } from "../../entities/modules";
 import { Task } from "../../entities/ui";
-import { useGetTasksQuery } from "../../redux/slice/taskSlice";
 
 const todoTabs: TodoTabType[] = ["All", "Completed", "Pending"];
 
 const RenderContent = () => {
-  const { data: tasks, isLoading, isSuccess } = useGetTasksQuery("");
+  // Replace the lines below with the variables destructured from API query
+  const tasks: Task[] = [];
+  const isLoading = false;
+  const isSuccess = true;
+  //
   const [todoTab, setTodoTab] = useState<TodoTabType>("All");
-  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
+  const [filteredTasks, setFilteredTasks] = useState<Task[] | null>();
 
   const sortTasks = (tab: "All" | "Completed" | "Pending") => {
     setTodoTab(tab);
@@ -18,7 +21,7 @@ const RenderContent = () => {
     if (!tasks) return;
 
     if (tab === "All") {
-      setFilteredTasks(tasks);
+      setFilteredTasks(null);
     }
 
     if (tab === "Completed") {
@@ -50,7 +53,7 @@ const RenderContent = () => {
         })}
       </section>
       <section className="mt-8">
-        <Tasks tasks={filteredTasks || []} tab={todoTab} />
+        <Tasks tasks={filteredTasks || tasks} tab={todoTab} />
       </section>
     </>
   ) : (
